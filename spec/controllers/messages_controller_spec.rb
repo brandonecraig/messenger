@@ -93,5 +93,14 @@ RSpec.describe MessagesController do
       expect(parsed_body["recipient"]).to eq(@recipient)
       expect(parsed_body["body"]).to eq("Do you like tacos?")
     end
+
+    it "returns errors when message cannot be created" do
+      params = { message: { recipient: @recipient, sender: @sender } }
+      post :create, params: params
+
+      expect(response.code).to eq("422")
+      parsed_body = JSON.parse(response.body)
+      expect(parsed_body["body"]).to eq(["must be present"])
+    end
   end
 end
