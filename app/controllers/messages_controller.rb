@@ -1,5 +1,5 @@
 class MessagesController < ApplicationController
-  before_action :set_recipient, only: [:index, :show]
+  before_action :set_recipient, only: [:show]
   before_action :set_sender, only: [:show]
 
   def show
