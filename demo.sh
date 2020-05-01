@@ -42,14 +42,26 @@ curl -H "Content-Type: application/json" -X GET -d '{"recipient":"Brandon", "sen
 
 
 echo ""
+echo ""
+echo ""
+echo ""
+echo ""
 echo "You can also see all messages sent to a specific user. To demonstrate this lets send one more message:"
 curl -H "Content-Type: application/json" -X POST -d '{"sender":"Doggo","recipient":"Brandon", "body":"Hey Brandon lets go for a walk"}' http://localhost:3000/messages
 
+echo ""
+echo ""
+echo ""
+echo ""
 echo ""
 echo "Here all the messages sent to Brandon"
 
 curl -H "Content-Type: application/json" -X GET http://localhost:3000/messages/Brandon
 
 
+echo ""
+echo ""
+echo ""
+echo ""
 echo ""
 echo "The messenger api only returns the most recent 100 messages that are less than a month old."

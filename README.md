@@ -10,13 +10,13 @@ The message class contains the recipient username, the sender username, the body
 of the message and timestamps.
 
 At first I considered including a Users class. After considering the requirements
-I decided to forgo users for now. All of the requirement functionality can be
+I decided to forgo users for now. All of the required functionality can be
 accomplished without a Users class. Additionally, including a User class that
-only included one field (username) would lead to an N+1 when trying to return
+only included one field (username) would lead to an N+1 when trying to serialize
 the usernames within the messages json payload and would require additional
 logic to preload those usernames before returning the payload. For now that
-doesn't seem necessary so I went with the simpler option of storing the username
-as the sender and recipient on message.
+doesn't seem necessary so I went with the simpler option of storing the
+usernames as the sender and recipient on message.
 
 1. A short text message can be sent from one user (the sender) to another (the
     recipient).
@@ -24,8 +24,8 @@ as the sender and recipient on message.
 This is achieved through the MessagesController#create action. A request is made
 with a recipient username, a sender username and the body of the message. The
 text datatype allows messages up to 30,000 characters. If a longer length is
-needed in the future the message could be split up into as many partial messages as
-needed.
+needed in the future one solution would be to split up the text into as many
+message as needed.
 
 2. Recent messages can be requested for a recipient from a specific sender -
 with a limit of 100 messages or all messages in last 30 days.
@@ -59,7 +59,7 @@ If no sender provided, endpoint will return messages sent to recipient from all
 users. Messages are limited to the most recent 100 that are less than a month
 old.
 
-### Create new post
+### Create new message
 
 Endpoint: "/messages/"
 Method: POST
@@ -97,9 +97,15 @@ See more about that below.
 
 6. Ensure we can start / invoke your api.
 
+I use rvm to manage my ruby version. You can get rvm setup here:
+https://rvm.io/rvm/install
+
 ```
+   rvm install ruby-2.7.1
    rvm use ruby-2.7.1
    bundle install
+   bundle exec rake db:create
+   bundle exec rake db:migrate
    source .env
    bundle exec rails server
 ```
@@ -108,6 +114,8 @@ NOTE: The configuration in .env is to suppress the deprecation notices. I found
 these noisy. In a professional situation I would address these deprecation
 warnings but for the purposes of this assignment I didn't think it was a
 productive use of my time.
+
+You can invoke the API by making requests to localhost:3000.
 
 7. Bonus Features
 
